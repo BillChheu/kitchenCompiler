@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-kitchencompiler-dev-195117-authRole",
+      "UnauthRoleArn": "arn:aws:iam::514925438919:role/amplify-kitchencompiler-dev-195117-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::514925438919:role/amplify-kitchencompiler-dev-195117-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-kitchencompiler-dev-195117-deployment",
+      "UnauthRoleName": "amplify-kitchencompiler-dev-195117-unauthRole",
+      "StackName": "amplify-kitchencompiler-dev-195117",
+      "StackId": "arn:aws:cloudformation:us-east-1:514925438919:stack/amplify-kitchencompiler-dev-195117/e8501940-822f-11ec-b9a6-1264f938c47d",
+      "AmplifyAppId": "d2ntajptwd82lo"
+    }
+  }
+}
