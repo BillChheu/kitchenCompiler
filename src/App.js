@@ -2,10 +2,13 @@ import logo from './logo.svg';
 import './App.css';
 import {useState} from "react"
 
+import Button from "react-bootstrap/Button"
 import Navbar from "react-bootstrap/Navbar"
 import Container from "react-bootstrap/Container"
 import Nav from "react-bootstrap/Nav"
 import NavDropdown from "react-bootstrap/NavDropdown"
+import Modal from "react-bootstrap/Modal"
+import Form from "react-bootstrap/Form"
 
 
 function App() {
@@ -35,9 +38,41 @@ function App() {
           <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
         </NavDropdown>
       </Nav>
+
+      <Nav className="ms-auto">
+        <Nav.Link onClick={handleShow}>Login/Register</Nav.Link>
+        
+      </Nav>
     </Navbar.Collapse>
   </Container>
 </Navbar>
+<Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Login</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Form>
+  <Form.Group className="mb-3" controlId="formBasicEmail">
+    <Form.Label>Email address</Form.Label>
+    <Form.Control type="email" placeholder="Enter email" />
+  </Form.Group>
+
+  <Form.Group className="mb-3" controlId="formBasicPassword">
+    <Form.Label>Password</Form.Label>
+    <Form.Control type="password" placeholder="Password" />
+  </Form.Group>
+  </Form>
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+           Log in
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
 
       <header className="App-header">

@@ -14,7 +14,14 @@
 }
 
 .navbar {
-  background-color: #ff0000; 
+  background-color: #ff0000;
+}
+
+.navbar > .container {
+  max-width: 100%;
+  margin-left: 30px;
+  margin-right: 30px;
+  padding: 0;
 }
 
 .App-header {
