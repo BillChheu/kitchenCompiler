@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import {useState} from "react"
-
+import { signUp } from './Auth';
 import Button from "react-bootstrap/Button"
 import Navbar from "react-bootstrap/Navbar"
 import Container from "react-bootstrap/Container"
@@ -11,12 +11,31 @@ import Modal from "react-bootstrap/Modal"
 import Form from "react-bootstrap/Form"
 
 
+
+
 function App() {
+
+  
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [showSignUp, setShowSignUp] = useState(false);
+
+  function handleCloseSignUp(event) {
+    setShowSignUp(false);
+    console.log(event.target.signUpEmail.value);
+ //   signUp(this.signUpEmail.current.value, this.signUpPassword.current.value)
+  }
+
+  const handleSignUpChange = (event) => {
+      
+  }
+  
+
+  const handleShowSignUp = () => setShowSignUp(true);
 
 
   return (
@@ -40,18 +59,20 @@ function App() {
       </Nav>
 
       <Nav className="ms-auto">
-        <Nav.Link onClick={handleShow}>Login/Register</Nav.Link>
+        <Nav.Link onClick={handleShowSignUp}> Sign Up </Nav.Link>
+        <Nav.Link onClick={handleShow}>Log In</Nav.Link>
         
       </Nav>
     </Navbar.Collapse>
   </Container>
 </Navbar>
+
 <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
+          <Modal.Title>Log in</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Form>
+        <Form onSubmit={handleClose}>
   <Form.Group className="mb-3" controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>
     <Form.Control type="email" placeholder="Enter email" />
@@ -65,11 +86,34 @@ function App() {
 
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
           <Button variant="primary" onClick={handleClose}>
            Log in
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={showSignUp} onHide={handleCloseSignUp}>
+        <Modal.Header closeButton>
+          <Modal.Title>Sign Up</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+        <Form onSubmit={handleCloseSignUp}>
+  <Form.Group className="mb-3" controlId="formBasicEmail">
+    <Form.Label>Email address</Form.Label>
+    <Form.Control type="email" placeholder="Enter email" name="signUpEmail"/>
+  </Form.Group>
+
+  <Form.Group className="mb-3" controlId="formBasicPassword">
+    <Form.Label>Password</Form.Label>
+    <Form.Control type="password" placeholder="Password" name="signUpPassword" />
+  </Form.Group>
+  </Form>
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" type="submit" onClick={handleCloseSignUp}>
+           Sign Up
           </Button>
         </Modal.Footer>
       </Modal>
