@@ -2,7 +2,7 @@
 import logo from './logo.svg';
 import './App.css';
 import {useState} from "react"
-import { signUp } from './Auth';
+import { signUp, signIn } from './Auth';
 import Button from "react-bootstrap/Button"
 import Navbar from "react-bootstrap/Navbar"
 import Container from "react-bootstrap/Container"
@@ -20,11 +20,22 @@ function App() {
 
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = (e) => {
+    e.preventDefault();
+    setShow(false);
+    
+    console.log(logInEmail);
+    console.log(logInPassword);
+    signIn(logInEmail, logInPassword);
+
+  }
   const handleShow = () => setShow(true);
 
-  const [signUpEmail, setEmail] = useState("");
-  const [signUpPassword, setPassword] = useState("");
+  const [signUpEmail, setSignUpEmail] = useState("");
+  const [signUpPassword, setSignUpPassword] = useState("");
+
+  const [logInEmail, setLogInEmail] = useState("");
+  const [logInPassword, setLogInPassword] = useState("");
 
   const [showSignUp, setShowSignUp] = useState(false);
 
@@ -82,23 +93,27 @@ function App() {
         <Form onSubmit={handleClose}>
   <Form.Group className="mb-3" controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>
-    <Form.Control type="email" placeholder="Enter email" />
+    <Form.Control type="email" placeholder="Enter email" value={logInEmail} onChange={(e) => setLogInEmail(e.target.value)}/>
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="formBasicPassword">
     <Form.Label>Password</Form.Label>
-    <Form.Control type="password" placeholder="Password" />
+    <Form.Control type="password" placeholder="Password" value={logInPassword} onChange={(e) => setLogInPassword(e.target.value)}/>
+
+    <Modal.Footer>
+          <Button variant="primary" type="submit">
+           Log in
+          </Button>
+        </Modal.Footer>
+
   </Form.Group>
   </Form>
 
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-           Log in
-          </Button>
-        </Modal.Footer>
+        
       </Modal>
-
+      
+{/* TODO: ADD VERIFICATION STEP */}
       <Modal show={showSignUp} onHide={handleCloseSignUp}>
         <Modal.Header closeButton>
           <Modal.Title>Sign Up</Modal.Title>
@@ -108,12 +123,12 @@ function App() {
         <Form onSubmit={handleCloseSignUp}>
   <Form.Group className="mb-3" controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>
-    <Form.Control type="email" placeholder="Enter email" value={signUpEmail} onChange={(e) => setEmail(e.target.value)}/>
+    <Form.Control type="email" placeholder="Enter email" value={signUpEmail} onChange={(e) => setSignUpEmail(e.target.value)}/>
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="formBasicPassword">
     <Form.Label>Password</Form.Label>
-    <Form.Control type="password" placeholder="Password" value={signUpPassword} onChange={(e) => setPassword(e.target.value)}/>
+    <Form.Control type="password" placeholder="Password" value={signUpPassword} onChange={(e) => setSignUpPassword(e.target.value)}/>
     
     <Modal.Footer>
           <Button variant="primary" type="submit" >

@@ -12,3 +12,11 @@ export async function signUp(username, password) {
     }
 }
 
+export async function signIn(username, password) {
+    try {
+        const user = await Auth.signIn(username, password);
+    } catch (error) {
+        console.log("error signing in", error);
+    }
+}
+
