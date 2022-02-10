@@ -1,3 +1,4 @@
+
 import logo from './logo.svg';
 import './App.css';
 import {useState} from "react"
@@ -24,9 +25,11 @@ function App() {
 
   const [showSignUp, setShowSignUp] = useState(false);
 
-  function handleCloseSignUp(event) {
+   const handleCloseSignUp = (e) => { 
+    e.preventDefault();
     setShowSignUp(false);
-    console.log(event.target.signUpEmail.value);
+   
+   // console.log(event.target.signUpEmail.value);
  //   signUp(this.signUpEmail.current.value, this.signUpPassword.current.value)
   }
 
@@ -107,15 +110,17 @@ function App() {
   <Form.Group className="mb-3" controlId="formBasicPassword">
     <Form.Label>Password</Form.Label>
     <Form.Control type="password" placeholder="Password" name="signUpPassword" />
+    
+    <Modal.Footer>
+          <Button variant="primary" type="submit" >
+           Sign Up
+          </Button>
+        </Modal.Footer>
   </Form.Group>
   </Form>
 
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" type="submit" onClick={handleCloseSignUp}>
-           Sign Up
-          </Button>
-        </Modal.Footer>
+        
       </Modal>
 
 
