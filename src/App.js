@@ -23,14 +23,18 @@ function App() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [signUpEmail, setEmail] = useState("");
+  const [signUpPassword, setPassword] = useState("");
+
   const [showSignUp, setShowSignUp] = useState(false);
 
    const handleCloseSignUp = (e) => { 
     e.preventDefault();
     setShowSignUp(false);
    
-   // console.log(event.target.signUpEmail.value);
- //   signUp(this.signUpEmail.current.value, this.signUpPassword.current.value)
+    console.log(signUpEmail);
+    console.log(signUpPassword);
+    signUp(signUpEmail, signUpPassword);
   }
 
   const handleSignUpChange = (event) => {
@@ -104,12 +108,12 @@ function App() {
         <Form onSubmit={handleCloseSignUp}>
   <Form.Group className="mb-3" controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>
-    <Form.Control type="email" placeholder="Enter email" name="signUpEmail"/>
+    <Form.Control type="email" placeholder="Enter email" value={signUpEmail} onChange={(e) => setEmail(e.target.value)}/>
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="formBasicPassword">
     <Form.Label>Password</Form.Label>
-    <Form.Control type="password" placeholder="Password" name="signUpPassword" />
+    <Form.Control type="password" placeholder="Password" value={signUpPassword} onChange={(e) => setPassword(e.target.value)}/>
     
     <Modal.Footer>
           <Button variant="primary" type="submit" >
