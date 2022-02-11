@@ -20,6 +20,18 @@ function App() {
 
   const [show, setShow] = useState(false);
 
+  const exitSignUp = () => {
+    setShowSignUp(false);
+    setSignUpPassword("")
+    setSignUpEmail("")
+  } 
+
+  const exitLogIn = () => {
+    setShow(false);
+    setLogInPassword("")
+    setLogInEmail("")
+  }
+
   const handleClose = (e) => {
     e.preventDefault();
     setShow(false);
@@ -27,6 +39,9 @@ function App() {
     console.log(logInEmail);
     console.log(logInPassword);
     signIn(logInEmail, logInPassword);
+    logInEmail = "";
+    logInPassword = "";
+
 
   }
   const handleShow = () => setShow(true);
@@ -46,6 +61,8 @@ function App() {
     console.log(signUpEmail);
     console.log(signUpPassword);
     signUp(signUpEmail, signUpPassword);
+    setSignUpPassword("")
+    setSignUpEmail("")
   }
 
   const handleSignUpChange = (event) => {
@@ -85,7 +102,7 @@ function App() {
   </Container>
 </Navbar>
 
-<Modal show={show} onHide={handleClose}>
+<Modal show={show} onHide={exitLogIn}>
         <Modal.Header closeButton>
           <Modal.Title>Log in</Modal.Title>
         </Modal.Header>
@@ -114,7 +131,7 @@ function App() {
       </Modal>
       
 {/* TODO: ADD VERIFICATION STEP */}
-      <Modal show={showSignUp} onHide={handleCloseSignUp}>
+      <Modal show={showSignUp} onHide={exitSignUp}>
         <Modal.Header closeButton>
           <Modal.Title>Sign Up</Modal.Title>
         </Modal.Header>
