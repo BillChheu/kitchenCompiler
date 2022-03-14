@@ -2,7 +2,7 @@
 import logo from './logo.svg';
 import './App.css';
 import {useState} from "react"
-import { signUp, signIn } from './Auth';
+import {Auth} from "aws-amplify";
 import Button from "react-bootstrap/Button"
 import Navbar from "react-bootstrap/Navbar"
 import Container from "react-bootstrap/Container"
@@ -12,19 +12,18 @@ import Modal from "react-bootstrap/Modal"
 import Form from "react-bootstrap/Form"
 
 
-
-
 function App() {
 
   
-
   const [show, setShow] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const exitSignUp = () => {
     setShowSignUp(false);
     setSignUpPassword("")
     setSignUpEmail("")
   } 
+
 
   const exitLogIn = () => {
     setShow(false);
@@ -39,8 +38,8 @@ function App() {
     console.log(logInEmail);
     console.log(logInPassword);
     signIn(logInEmail, logInPassword);
-    logInEmail = "";
-    logInPassword = "";
+    setLogInPassword("")
+    setLogInEmail("")
 
 
   }
@@ -69,6 +68,38 @@ function App() {
       
   }
   
+  const signIn = async(username, password) => {
+    try {
+      const user = await Auth.signIn(username, password);
+      setLoggedIn(true)
+  } catch (error) {
+      console.log("error signing in", error);
+  }
+
+}
+
+const signOut = async() => {
+  try {
+    await Auth.signOut();
+    setLoggedIn(false)
+} catch (error) {
+    console.log('error signing out: ', error);
+}
+}
+
+const signUp = async(username, password) => {
+  try {
+    const {user} = await Auth.signUp({
+        username, 
+        password
+    });
+    console.log(user);
+} catch(error) {
+    console.log("error signing up user: ", error);
+}
+}
+  
+
 
   const handleShowSignUp = () => setShowSignUp(true);
 
@@ -94,8 +125,10 @@ function App() {
       </Nav>
 
       <Nav className="ms-auto">
-        <Nav.Link onClick={handleShowSignUp}> Sign Up </Nav.Link>
-        <Nav.Link onClick={handleShow}>Log In</Nav.Link>
+        { !loggedIn ? /*<Nav.Link onClick={handleShowSignUp}> Sign Up </Nav.Link> */ 
+        <Nav.Link onClick={handleShow}>Log In</Nav.Link> :
+         <Nav.Link> Profile </Nav.Link>
+         }
         
       </Nav>
     </Navbar.Collapse>
