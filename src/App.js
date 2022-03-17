@@ -125,10 +125,11 @@ const signUp = async(username, password) => {
       </Nav>
 
       <Nav className="ms-auto">
-        { !loggedIn ? /*<Nav.Link onClick={handleShowSignUp}> Sign Up </Nav.Link> */ 
-        <Nav.Link onClick={handleShow}>Log In</Nav.Link> :
+        { !loggedIn && <> <Nav.Link onClick={handleShowSignUp}> Sign Up </Nav.Link> 
+        <Nav.Link onClick={handleShow}>Log In</Nav.Link> </>}
+        {loggedIn &&
          <Nav.Link> Profile </Nav.Link>
-         }
+        }
         
       </Nav>
     </Navbar.Collapse>
@@ -163,7 +164,7 @@ const signUp = async(username, password) => {
         
       </Modal>
       
-{/* TODO: ADD VERIFICATION STEP */}
+{/* TODO: ADD/REMOVE VERIFICATION STEP */}
       <Modal show={showSignUp} onHide={exitSignUp}>
         <Modal.Header closeButton>
           <Modal.Title>Sign Up</Modal.Title>
