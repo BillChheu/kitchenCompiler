@@ -128,7 +128,9 @@ const signUp = async(username, password) => {
         { !loggedIn && <> <Nav.Link onClick={handleShowSignUp}> Sign Up </Nav.Link> 
         <Nav.Link onClick={handleShow}>Log In</Nav.Link> </>}
         {loggedIn &&
-         <Nav.Link> Profile </Nav.Link>
+         <NavDropdown title="Profile" id = "basic-nav-dropdown">
+         <NavDropdown.Item onClick={signOut}>Sign Out</NavDropdown.Item>
+         </NavDropdown>
         }
         
       </Nav>
